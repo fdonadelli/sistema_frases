@@ -1,6 +1,5 @@
-import { Person } from "../entity/person";
+import { Person } from '../entity/person';
 
-export interface IUserRepository {
-
-    create(payload: Person) : string; 
+export interface IPersonRepository {
+  create(payload: Person): string;
 }

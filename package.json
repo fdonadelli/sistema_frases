@@ -5,6 +5,9 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "imports": {
+    "#configs/*": "./dist/src/configs/*.js"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -23,8 +26,18 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/swagger": "^7.1.17",
+    "dotenv": "^16.3.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "swagger-stats": "^0.99.7"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npx pretty-quick --staged",
+      "eslint --fix",
+      "jest --bail --findRelatedTests --passWithNoTests"
+    ]
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -63,6 +76,23 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "coveragePathIgnorePatterns": [
+      ".index.ts",
+      ".module.ts",
+      ".main.ts",
+      ".src/configs/swagger/*",
+      "dist/*",
+      "eslintrc.js",
+      "coverage/*",
+      "create_config_map.js",
+      "./src/@seedwork/logging/*",
+      ".src/configs/logging/*",
+      "k8s_helpers/*",
+      ".mock.ts"
+    ],
+    "moduleNameMapper": {
+      "#configs/(.*)": "<rootDir>/src/configs/$1"
+    },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }

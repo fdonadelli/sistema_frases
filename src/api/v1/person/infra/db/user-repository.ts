@@ -1,6 +1,5 @@
-export class UserRepository {
-
-    async create(payload) {
-        //vai criar no banco
-    }
+export class PersonRepository {
+  async create(payload) {
+    //vai criar no banco
+  }
 }
