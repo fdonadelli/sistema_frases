@@ -14,7 +14,8 @@ export class PersonRepository implements IPersonRepository {
   async create(payload: Person): Promise<void> {
     await this.personRepository.save(payload);
   }
-  findAll(): Promise<Person[]> {
-    return this.personRepository.find();
+  async findAll(): Promise<Person[] | undefined> {
+    const result = await this.personRepository.find();
+    return result;
   }
 }

@@ -15,22 +15,32 @@ services:
     entrypoint:
       - ./init.sh
     networks:
-      - network_local
+      - postgres-compose-network
 
-  postgresql_local:
-    build: docker/postgres/.
-    env_file:
-      - .env
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "PgAdmin#2023"
+      POSTGRES_DB: "sistema-frases-dev"
     ports:
-      - '5454:5432'
-    networks:
-      - network_local
+      - "15432:5432"
     volumes:
-      - pg_data_local:/var/lib/postgresql/data
+      - ./pgsql:/var/lib/postgresql/data 
+    networks:
+      - postgres-compose-network
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "user@localhost.com"
+      PGADMIN_DEFAULT_PASSWORD: "PgAdmin#2023"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+    networks:
+      - postgres-compose-network
 
-volumes:
-  pg_data_local:
-
-networks:
-  network_local:
+networks: 
+  postgres-compose-network:
     driver: bridge
