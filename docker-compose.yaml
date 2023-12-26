@@ -14,3 +14,23 @@ services:
       - ./node_modules:/usr/src/app/node_modules
     entrypoint:
       - ./init.sh
+    networks:
+      - network_local
+
+  postgresql_local:
+    build: docker/postgres/.
+    env_file:
+      - .env
+    ports:
+      - '5454:5432'
+    networks:
+      - network_local
+    volumes:
+      - pg_data_local:/var/lib/postgresql/data
+
+volumes:
+  pg_data_local:
+
+networks:
+  network_local:
+    driver: bridge
