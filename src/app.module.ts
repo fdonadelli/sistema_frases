@@ -8,11 +8,13 @@ import { TypeOrmDirectory } from './api/v1/person/infra/persistence/typeorm/Type
     PersonModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'postgresql_local',
-      port: 5454,
-      username: 'user_sistema_frases',
-      password: 'pass_sistema_frases',
-      database: 'sf_db',
+      host: 'postgres',
+      port: 5432,
+      //  host: 'localhost', DESCOMENTAR CASO QUEIRA CONECTAR FORA DO CONTEINER
+      // port: 15432,
+      username: 'postgres',
+      password: 'PgAdmin#2023',
+      database: 'sistema-frases-dev',
       entities: [`${TypeOrmDirectory}/entity/**/*{.ts,.js}`],
       synchronize: true,
     }),
