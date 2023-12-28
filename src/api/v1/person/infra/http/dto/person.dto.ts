@@ -14,5 +14,5 @@ export class CreatePersonInputDto {
 
   @ApiProperty({ example: '99999999999' })
   @IsString()
-  telefone: string;
+  phone: string;
 }
